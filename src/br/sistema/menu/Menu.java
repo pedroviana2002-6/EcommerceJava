@@ -29,6 +29,7 @@ public class Menu {
             System.out.println("5. Buscar Produto por Nome");
             System.out.println("6. Buscar Produto por Código");
             System.out.println("7. Listar Produtos de um Fornecedor");
+            System.out.println("8. Listar todos os fornecedores");
             System.out.println("0. Sair");
             System.out.print("Escolha: ");
 
@@ -50,6 +51,7 @@ public class Menu {
                 case 5 -> buscarPorNome();
                 case 6 -> buscarPorCodigo();
                 case 7 -> listarPorFornecedor();
+                case 8 -> listarFornecedores();
                 case 0 -> System.out.println("Saindo...");
                 default -> System.out.println("Opção inválida.");
             }
@@ -81,7 +83,7 @@ public class Menu {
         for (Produto p : estoque.listarProdutos()) {
             System.out.println("Produto: " + p.getNome() + " | Preço: R$" + p.getPreco() +
                 " | Quantidade: " + p.getQuantidade() +
-                " | Fornecedor: " + p.getFornecedor().getNome());
+                " | Fornecedor: " + p.getFornecedor().getNome() + " | Código: " + p.getCodigo());
             System.out.print("\n\n");
         }
     }
@@ -98,16 +100,20 @@ public class Menu {
 
         if (escolha > 0 && escolha <= fornecedores.size()) {
             return fornecedores.get(escolha - 1);
-        } else {
+        } 
+        else{
             System.out.print("Nome do novo fornecedor: ");
             String nome = scanner.nextLine();
             System.out.print("CNPJ do novo fornecedor: ");
             String cnpj = scanner.nextLine();
-            Fornecedor novo = new Fornecedor(nome, cnpj);
+            System.out.print("Endereço do novo fornecedor: ");
+            String endereco = scanner.nextLine();
+            Fornecedor novo = new Fornecedor(nome, cnpj, endereco);
             fornecedores.add(novo);
             return novo;
         }
     }
+
     
     private void alterarProduto() {
         System.out.print("Digite o código do produto: ");
@@ -175,8 +181,17 @@ public class Menu {
             System.out.println("Nenhum produto para este fornecedor.");
         } else {
             for (Produto p : lista) {
-                System.out.println(p.getCodigo() + " - " + p.getNome());
+            	 System.out.println("Produto: " + p.getNome() + " | Preço: R$" + p.getPreco() +
+                         " | Quantidade: " + p.getQuantidade() + " | Código: " + p.getCodigo());
+                     System.out.print("\n\n");
             }
         }
+    }
+    
+    private void listarFornecedores() {
+    	 System.out.println("Fornecedores disponíveis:");
+         for (int i = 0; i < fornecedores.size(); i++) {
+             System.out.println((i + 1) + ". " + fornecedores.get(i).getNome() + "\nCNPJ: " + fornecedores.get(i).getCnpj() + "\nEndereco: " + fornecedores.get(i).getEndereco());
+         }
     }
 }
