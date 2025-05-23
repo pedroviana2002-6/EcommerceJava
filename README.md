@@ -1,3 +1,1 @@
-mudanças do último commit:
-
-modificações em Fornecedor.java e Menu.java 
+# Trabalho de Programação Orientada a Objetos UCS2025-2
